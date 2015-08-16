@@ -1,35 +1,30 @@
 ---
 # Installation
-- name: Install Transmission ppa key
-  apt_key: id=365C5CA1 url=http://keyserver.ubuntu.com:11371/pks/lookup?op=get&search=0x365C5CA1 state=present
-- name: Install Transmission ppa
-  apt_repository: repo=ppa:transmissionbt/ppa state=present
 - name: Install Transmission
-  apt: name=transmission-daemon state={{ transmission.apt_state }}
+  apt: name=transmission-daemon state=present
 
+# Configuration
 - name: Make sure transmission is not running
   service: name=transmission-daemon state=stopped
   ignore_errors: true
 
 - name: Add downloads folder
-  file: path={{ transmission.download_dir }} owner={{ transmission.user }} state=directory
-
-# - name: Change downloads folder mode
-#   command: chmod 777 {{ transmission.download_dir }}
+  file: path=/home/{{ transmission_user }}/{{ transmission_download_dir }} owner={{ transmission_user }} group={{ transmission_user }} state=directory mode=0777
 
 - name: Add watch dir
-  file: path={{ transmission.watch_dir }} owner={{ transmission.user }} state=directory
-  when: transmission.watch_dir_enabled
+  file: path=/home/{{ transmission_user }}/{{ transmission_watch_dir }} owner={{ transmission_user }} group={{ transmission_user }} state=directory
+  when: transmission_watch_dir_enabled
 
 - name: Add incomplete folder
-  file: path={{ transmission.incomplete_dir }} owner={{ transmission.user }} state=directory
-  when: transmission.incomplete_dir_enabled
+  file: path=/home/{{ transmission_user }}/{{ transmission_incomplete_dir }} owner={{ transmission_user }} group={{ transmission_user }} state=directory mode=0777
+  when: transmission_incomplete_dir_enabled
 
 - name: Copy Transmission configuration
   template:
     src=settings.json
     dest=/etc/transmission-daemon/settings.json
 
+# Service start
 - name: Start transmission
   service: name=transmission-daemon state=started
   ignore_errors: true
