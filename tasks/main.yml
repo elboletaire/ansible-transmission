@@ -1,0 +1,35 @@
+---
+# Installation
+- name: Install Transmission ppa key
+  apt_key: id=365C5CA1 url=http://keyserver.ubuntu.com:11371/pks/lookup?op=get&search=0x365C5CA1 state=present
+- name: Install Transmission ppa
+  apt_repository: repo=ppa:transmissionbt/ppa state=present
+- name: Install Transmission
+  apt: name=transmission-daemon state={{ transmission.apt_state }}
+
+- name: Make sure transmission is not running
+  service: name=transmission-daemon state=stopped
+  ignore_errors: true
+
+- name: Add downloads folder
+  file: path={{ transmission.download_dir }} owner={{ transmission.user }} state=directory
+
+# - name: Change downloads folder mode
+#   command: chmod 777 {{ transmission.download_dir }}
+
+- name: Add watch dir
+  file: path={{ transmission.watch_dir }} owner={{ transmission.user }} state=directory
+  when: transmission.watch_dir_enabled
+
+- name: Add incomplete folder
+  file: path={{ transmission.incomplete_dir }} owner={{ transmission.user }} state=directory
+  when: transmission.incomplete_dir_enabled
+
+- name: Copy Transmission configuration
+  template:
+    src=settings.json
+    dest=/etc/transmission-daemon/settings.json
+
+- name: Start transmission
+  service: name=transmission-daemon state=started
+  ignore_errors: true

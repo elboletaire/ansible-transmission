@@ -1,0 +1,12 @@
+transmission:
+  apt_state: latest
+  user: transmission
+  passwd: yourTransmissionPassword
+  rpc_whitelist_enabled: true
+  rpc_whitelist: 127.0.0.1
+  umask: 18
+  download_dir: "/home/{{ transmission.user }}/downloads"
+  incomplete_dir_enabled: false
+  incomplete_dir: "{{ transmission.download_dir }}/.incomplete"
+  watch_dir_enabled: false
+  watch_dir: "/home/{{ transmission.user }}/torrents"
