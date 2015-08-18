@@ -9,14 +9,14 @@
   ignore_errors: true
 
 - name: Add downloads folder
-  file: path=/home/{{ transmission_user }}/{{ transmission_download_dir }} owner={{ transmission_user }} group={{ transmission_user }} state=directory mode=0777
+  file: path={{ transmission_download_dir }} owner={{ transmission_user }} group={{ transmission_user }} state=directory mode=0777
 
 - name: Add watch dir
-  file: path=/home/{{ transmission_user }}/{{ transmission_watch_dir }} owner={{ transmission_user }} group={{ transmission_user }} state=directory
+  file: path={{ transmission_watch_dir }} owner={{ transmission_user }} group={{ transmission_user }} state=directory
   when: transmission_watch_dir_enabled
 
 - name: Add incomplete folder
-  file: path=/home/{{ transmission_user }}/{{ transmission_incomplete_dir }} owner={{ transmission_user }} group={{ transmission_user }} state=directory mode=0777
+  file: path={{ transmission_incomplete_dir }} owner={{ transmission_user }} group={{ transmission_user }} state=directory mode=0777
   when: transmission_incomplete_dir_enabled
 
 - name: Copy Transmission configuration
