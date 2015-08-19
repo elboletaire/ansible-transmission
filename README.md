@@ -31,13 +31,15 @@ Variables
 Example Playbook
 ----------------
 
-    - hosts: servers
-      roles:
-        - {
-            role: transmission,
-            sudo: yes,
-            transmission_user: Krilin
-          }
+```yaml
+  - hosts: servers
+    roles:
+      - {
+          role: transmission,
+          sudo: yes,
+          transmission_user: Krilin
+        }
+```
 
 
 License
