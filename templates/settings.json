@@ -43,7 +43,7 @@
     "ratio-limit": 2,
     "ratio-limit-enabled": false,
     "rename-partial-files": true,
-    "rpc-authentication-required": true,
+    "rpc-authentication-required": {{ transmission_rpc_auth_required | lower }},
     "rpc-bind-address": "0.0.0.0",
     "rpc-enabled": true,
     "rpc-password": "{{ transmission_passwd }}",
