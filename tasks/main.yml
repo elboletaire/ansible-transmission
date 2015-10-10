@@ -2,29 +2,36 @@
 # Installation
 - name: Install Transmission
   apt: name=transmission-daemon state=present
+  tags: transmission
 
 # Configuration
 - name: Make sure transmission is not running
   service: name=transmission-daemon state=stopped
   ignore_errors: true
+  tags: transmission
 
 - name: Add downloads folder
   file: path={{ transmission_download_dir }} owner={{ transmission_user }} group={{ transmission_user }} state=directory mode=0777
+  tags: transmission
 
 - name: Add watch dir
   file: path={{ transmission_watch_dir }} owner={{ transmission_user }} group={{ transmission_user }} state=directory
   when: transmission_watch_dir_enabled
+  tags: transmission
 
 - name: Add incomplete folder
   file: path={{ transmission_incomplete_dir }} owner={{ transmission_user }} group={{ transmission_user }} state=directory mode=0777
   when: transmission_incomplete_dir_enabled
+  tags: transmission
 
 - name: Copy Transmission configuration
   template:
     src=settings.json
     dest=/etc/transmission-daemon/settings.json
+  tags: transmission
 
 # Service start
 - name: Start transmission
   service: name=transmission-daemon state=started
   ignore_errors: true
+  tags: transmission
