@@ -45,7 +45,7 @@
 
 - name: Copy Transmission configuration
   template:
-    src: settings.json
+    src: etc/transmission-daemon/settings.json.j2
     dest: /etc/transmission-daemon/settings.json
   tags: transmission
 
