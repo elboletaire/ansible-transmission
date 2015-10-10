@@ -29,6 +29,7 @@
     path: "{{ transmission_watch_dir }}"
     owner: "{{ transmission_user }}"
     group: debian-transmission
+    mode: 0775
   when: transmission_watch_dir_enabled
   tags: transmission
 
