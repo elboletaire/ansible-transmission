@@ -11,16 +11,16 @@
   tags: transmission
 
 - name: Add downloads folder
-  file: path={{ transmission_download_dir }} owner={{ transmission_user }} group={{ transmission_user }} state=directory mode=0777
+  file: path={{ transmission_download_dir }} owner={{ transmission_user }} group=debian-transmission state=directory mode=0775
   tags: transmission
 
 - name: Add watch dir
-  file: path={{ transmission_watch_dir }} owner={{ transmission_user }} group={{ transmission_user }} state=directory
+  file: path={{ transmission_watch_dir }} owner={{ transmission_user }} group=debian-transmission state=directory
   when: transmission_watch_dir_enabled
   tags: transmission
 
 - name: Add incomplete folder
-  file: path={{ transmission_incomplete_dir }} owner={{ transmission_user }} group={{ transmission_user }} state=directory mode=0777
+  file: path={{ transmission_incomplete_dir }} owner={{ transmission_user }} group=debian-transmission state=directory mode=0775
   when: transmission_incomplete_dir_enabled
   tags: transmission
 
@@ -28,6 +28,13 @@
   template:
     src=settings.json
     dest=/etc/transmission-daemon/settings.json
+  tags: transmission
+
+- name: Add current user to transmission group
+  user:
+    name: "{{ transmission_user }}"
+    groups: debian-transmission
+    append: yes
   tags: transmission
 
 # Service start
