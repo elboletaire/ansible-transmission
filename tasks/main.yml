@@ -1,5 +1,6 @@
----
 # Installation
+---
+
 - name: Install Transmission
   apt:
     name: transmission-daemon
@@ -54,12 +55,5 @@
     name: "{{ transmission_user }}"
     groups: debian-transmission
     append: yes
-  tags: transmission
-
-# Service start
-- name: Start transmission
-  service:
-    name: transmission-daemon
-    state: started
-  ignore_errors: true
+  notify: start transmission
   tags: transmission
