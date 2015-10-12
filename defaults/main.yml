@@ -1,6 +1,5 @@
 ---
 transmission_user: "{{ ansible_user_id }}"
-transmission_passwd: yourTransmissionPassword
 transmission_rpc_auth_enabled: true
 transmission_rpc_whitelist_enabled: true
 transmission_rpc_whitelist: 127.0.0.1
