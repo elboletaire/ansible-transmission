@@ -1,0 +1,15 @@
+env:
+  - PLATFORM=debian-wheezy
+  - PLATFORM=debian-jessie
+  - PLATFORM=ubuntu-precise
+  - PLATFORM=ubuntu-trusty
+
+sudo: required
+
+language: python
+
+services:
+  - docker
+
+script:
+  - docker build -f tests/$PLATFORM.Dockerfile -t test-$PLATFORM . && docker run --name $PLATFORM test-$PLATFORM

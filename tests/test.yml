@@ -1,0 +1,6 @@
+# Test file for transmission
+---
+- hosts: all
+  roles:
+    - ../../transmission
+      transmission_password: t35tP455wd
