@@ -17,7 +17,7 @@ Variables
 
 | Variable                             | Optional | Default                 |
 | ------------------------------------ | -------- | ----------------------- |
-| `transmission_password`              | no       |                         |
+| `transmission_password`              | yes      |                         |
 | `transmission_rpc_auth_required`     | yes      | `no`                    |
 | `transmission_user`                  | yes      | `{{ ansible_user_id }}` |
 | `transmission_rpc_whitelist_enabled` | yes      | `false`                 |
@@ -44,7 +44,6 @@ A very simple example:
   roles:
     - role: transmission
       sudo: yes
-      transmission_password: Bu1m4
 ```
 
 A bit more complex example:
@@ -56,6 +55,7 @@ A bit more complex example:
       sudo: yes
       transmission_user: Krilin
       transmission_password: Bu1m4
+      transmission_rpc_auth_required: true
       transmission_rpc_whitelist_enabled: true
       transmission_rpc_whitelist: "127.0.0.1,192.168.1.*"
 ```
