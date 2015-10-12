@@ -18,6 +18,7 @@ Variables
 | Variable                             | Optional | Default                 |
 | ------------------------------------ | -------- | ----------------------- |
 | `transmission_password`              | no       |                         |
+| `transmission_rpc_auth_required`     | yes      | `no`                    |
 | `transmission_user`                  | yes      | `{{ ansible_user_id }}` |
 | `transmission_rpc_whitelist_enabled` | yes      | `false`                 |
 | `transmission_rpc_whitelist`         | yes      | `127.0.0.1`             |
