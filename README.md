@@ -1,6 +1,8 @@
 Transmission BT Ansible Role
 ============================
 
+[![Build status](https://img.shields.io/travis/elboletaire/ansible-transmission.svg?style=flat-square)](https://travis-ci.org/elboletaire/ansible-transmission)
+
 Ansible role for installing and configuring [Transmission](http://www.transmissionbt.com/).
 
 Requirements
