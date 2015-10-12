@@ -2,6 +2,7 @@ Transmission BT Ansible Role
 ============================
 
 [![Build status](https://img.shields.io/travis/elboletaire/ansible-transmission.svg?style=flat-square)](https://travis-ci.org/elboletaire/ansible-transmission)
+[![Ansible galaxy](https://img.shields.io/ansible/role/5518.svg?style=flat-square)](https://galaxy.ansible.com/list#/roles/5518)
 
 Ansible role for installing and configuring [Transmission](http://www.transmissionbt.com/).
 
@@ -10,29 +11,45 @@ Requirements
 
 Debian based system.
 
+Installing
+----------
+
+You can easily install this role using `ansible-galaxy`:
+
+```bash
+ansible-galaxy install elboletaire.transmission -p roles
+```
+
 Variables
 ---------
 
+There are no mandatory variables.
+
 ### Web interface & RPC
 
-| Variable                             | Optional | Default                 |
-| ------------------------------------ | -------- | ----------------------- |
-| `transmission_password`              | yes      |                         |
-| `transmission_rpc_auth_required`     | yes      | `no`                    |
-| `transmission_user`                  | yes      | `{{ ansible_user_id }}` |
-| `transmission_rpc_whitelist_enabled` | yes      | `false`                 |
-| `transmission_rpc_whitelist`         | yes      | `127.0.0.1`             |
+| Variable                             | Default                 |
+| ------------------------------------ | ----------------------- |
+| `transmission_password`              |                         |
+| `transmission_rpc_auth_required`     | `no`                    |
+| `transmission_user`                  | `{{ ansible_user_id }}` |
+| `transmission_rpc_whitelist_enabled` | `false`                 |
+| `transmission_rpc_whitelist`         | `127.0.0.1`             |
 
 ### Folders
 
-| Variable                              | Optional | Default                              |
-| ------------------------------------- | -------- | ------------------------------------ |
-| `transmission_download_dir`           | yes      | `{{ ansible_env.HOME }}/downloads`   |
-| `transmission_umask`                  | yes      | `2`                                  |
-| `transmission_watch_dir_enabled`      | yes      | `true`                               |
-| `transmission_watch_dir`              | yes      | `{{ ansible_env.HOME }}/torrents`    |
-| `transmission_incomplete_dir_enabled` | yes      | `false`                              |
-| `transmission_incomplete_dir`         | yes      | `{{ ansible_env.HOME }}/.incomplete` |
+| Variable                              | Default                              |
+| ------------------------------------- | ------------------------------------ |
+| `transmission_download_dir`           | `{{ ansible_env.HOME }}/downloads`   |
+| `transmission_umask`                  | `2`                                  |
+| `transmission_watch_dir_enabled`      | `true`                               |
+| `transmission_watch_dir`              | `{{ ansible_env.HOME }}/torrents`    |
+| `transmission_incomplete_dir_enabled` | `false`                              |
+| `transmission_incomplete_dir`         | `{{ ansible_env.HOME }}/.incomplete` |
+
+
+Please, refer to the
+[transmission documentation](https://trac.transmissionbt.com/wiki/EditConfigFiles)
+to better understand this variables.
 
 Example Playbook
 ----------------
