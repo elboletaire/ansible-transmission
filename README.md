@@ -1,8 +1,7 @@
 Transmission BT Ansible Role
 ============================
 
-Installs [Transmission](http://www.transmissionbt.com/) daemon directly from apt
-source.
+Ansible role for installing and configuring [Transmission](http://www.transmissionbt.com/).
 
 Requirements
 ------------
@@ -14,40 +13,56 @@ Variables
 
 ### Web interface & RPC
 
-* transmission_user
-* transmission_passwd
-* transmission_rpc_whitelist_enabled [false]
-* transmission_rpc_whitelist [127.0.0.1]
+| Variable                             | Optional | Default                 |
+| ------------------------------------ | -------- | ----------------------- |
+| `transmission_password`              | no       |                         |
+| `transmission_user`                  | yes      | `{{ ansible_user_id }}` |
+| `transmission_rpc_whitelist_enabled` | yes      | `false`                 |
+| `transmission_rpc_whitelist`         | yes      | `127.0.0.1`             |
 
 ### Folders
 
-* transmission_download_dir
-* transmission_umask
-* transmission_watch_dir_enabled
-* transmission_watch_dir
-* transmission_incomplete_dir_enabled
-* transmission_incomplete_dir
+| Variable                              | Optional | Default                              |
+| ------------------------------------- | -------- | ------------------------------------ |
+| `transmission_download_dir`           | yes      | `{{ ansible_env.HOME }}/downloads`   |
+| `transmission_umask`                  | yes      | `2`                                  |
+| `transmission_watch_dir_enabled`      | yes      | `true`                               |
+| `transmission_watch_dir`              | yes      | `{{ ansible_env.HOME }}/torrents`    |
+| `transmission_incomplete_dir_enabled` | yes      | `false`                              |
+| `transmission_incomplete_dir`         | yes      | `{{ ansible_env.HOME }}/.incomplete` |
 
 Example Playbook
 ----------------
 
+A very simple example:
+
 ```yaml
-  - hosts: servers
-    roles:
-      - {
-          role: transmission,
-          sudo: yes,
-          transmission_user: Krilin
-        }
+- hosts: all
+  roles:
+    - role: transmission
+      sudo: yes
+      transmission_password: Bu1m4
 ```
 
+A bit more complex example:
+
+```yaml
+- hosts: all
+  roles:
+    - role: transmission
+      sudo: yes
+      transmission_user: Krilin
+      transmission_password: Bu1m4
+      transmission_rpc_whitelist_enabled: true
+      transmission_rpc_whitelist: "127.0.0.1,192.168.1.*"
+```
 
 License
 -------
 
     The MIT License (MIT)
 
-    Copyright (c) 2015 Òscar Casajuana <elboletaire at underave dot net>
+    Copyright (c) 2015 Oscar Casajuana <elboletaire at underave dot net>
 
     Permission is hereby granted, free of charge, to any person obtaining a copy
     of this software and associated documentation files (the "Software"), to deal
