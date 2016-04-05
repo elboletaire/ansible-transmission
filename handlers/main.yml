@@ -1,7 +1,0 @@
-# Handlers file for transmission
----
-- name: start transmission
-  service:
-    name: transmission-daemon
-    state: started
-    enabled: yes
