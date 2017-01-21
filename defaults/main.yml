@@ -1,13 +1,26 @@
 ---
 transmission_user: "{{ ansible_user_id }}"
 transmission_password: youShouldChangeThisUnlessDisablingAuth
+
 transmission_rpc_auth_enabled: true
 transmission_rpc_whitelist_enabled: true
 transmission_rpc_whitelist: 127.0.0.1
+transmission_rpc_auth_required: false
+
 transmission_umask: 2
+
 transmission_download_dir: "{{ ansible_env.HOME }}/downloads"
 transmission_incomplete_dir_enabled: false
 transmission_incomplete_dir: "{{ ansible_env.HOME }}/.incomplete"
 transmission_watch_dir_enabled: true
 transmission_watch_dir: "{{ ansible_env.HOME }}/torrents"
-transmission_rpc_auth_required: false
+
+transmission_ratio_limit_enabled: false
+transmission_ratio_limit: 2
+
+transmission_speed_limit_up_enabled: false
+transmission_speed_limit_up: 100
+transmission_speed_limit_down_enabled: false
+transmission_speed_limit_down: 100
+
+

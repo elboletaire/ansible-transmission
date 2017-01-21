@@ -30,7 +30,7 @@ There are no mandatory variables.
 | Variable                             | Default                 |
 | ------------------------------------ | ----------------------- |
 | `transmission_password`              |                         |
-| `transmission_rpc_auth_required`     | `no`                    |
+| `transmission_rpc_auth_required`     | `false`                 |
 | `transmission_user`                  | `{{ ansible_user_id }}` |
 | `transmission_rpc_whitelist_enabled` | `false`                 |
 | `transmission_rpc_whitelist`         | `127.0.0.1`             |
@@ -45,6 +45,17 @@ There are no mandatory variables.
 | `transmission_watch_dir`              | `{{ ansible_env.HOME }}/torrents`    |
 | `transmission_incomplete_dir_enabled` | `false`                              |
 | `transmission_incomplete_dir`         | `{{ ansible_env.HOME }}/.incomplete` |
+
+### Speed limits & ratio
+
+| Variable                               | Default |
+| ---------------------------------------| ------- |
+| `transmission_speed_limit_up_enabled`  | `false` |
+| `transmission_speed_limit_up`          | `100`   |
+| `transmission_speed_limit_down_enabled`| `false` |
+| `transmission_speed_limit_down`        | `100`   |
+| `transmission_ratio_limit_enabled`     | `false` |
+| `transmission_ratio_limit`             | `2`     |
 
 
 Please, refer to the
