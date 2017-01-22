@@ -23,4 +23,5 @@ transmission_speed_limit_up: 100
 transmission_speed_limit_down_enabled: false
 transmission_speed_limit_down: 100
 
-
+transmission_blocklist_enabled: false
+transmission_blocklist_url: http://www.example.com/blocklist

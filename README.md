@@ -57,6 +57,12 @@ There are no mandatory variables.
 | `transmission_ratio_limit_enabled`     | `false` |
 | `transmission_ratio_limit`             | `2`     |
 
+### Blocklist
+
+| Variable                         | Default                            |
+| -------------------------------- | ---------------------------------- |
+| `transmission_blocklist_enabled` | `false`                            |
+| `transmission_blocklist_url`     | `http://www.example.com/blocklist` |
 
 Please, refer to the
 [transmission documentation](https://trac.transmissionbt.com/wiki/EditConfigFiles)
