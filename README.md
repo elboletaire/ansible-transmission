@@ -34,6 +34,7 @@ There are no mandatory variables.
 | `transmission_user`                  | `{{ ansible_user_id }}` |
 | `transmission_rpc_whitelist_enabled` | `false`                 |
 | `transmission_rpc_whitelist`         | `127.0.0.1`             |
+| `transmission_url`                   | `/transmission/`        |
 
 ### Folders
 

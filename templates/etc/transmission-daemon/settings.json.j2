@@ -48,7 +48,7 @@
     "rpc-enabled": true,
     "rpc-password": "{{ transmission_password }}",
     "rpc-port": 9091,
-    "rpc-url": "/transmission/",
+    "rpc-url": "{{ transmission_url }}",
     "rpc-username": "{{ transmission_user }}",
     "rpc-whitelist": "{{ transmission_rpc_whitelist }}",
     "rpc-whitelist-enabled": {{ transmission_rpc_whitelist_enabled | lower }},
