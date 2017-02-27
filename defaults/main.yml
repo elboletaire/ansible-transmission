@@ -1,6 +1,7 @@
 ---
 transmission_user: "{{ ansible_user_id }}"
 transmission_password: youShouldChangeThisUnlessDisablingAuth
+transmission_url: '/transmission/'
 
 transmission_rpc_auth_enabled: true
 transmission_rpc_whitelist_enabled: true
