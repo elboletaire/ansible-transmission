@@ -1,8 +1,8 @@
 Transmission BT Ansible Role
 ============================
 
-[![Build status](https://img.shields.io/travis/elboletaire/ansible-transmission.svg?style=flat-square)](https://travis-ci.org/elboletaire/ansible-transmission)
-[![Ansible galaxy](https://img.shields.io/ansible/role/5518.svg?style=flat-square)](https://galaxy.ansible.com/list#/roles/5518)
+[![Build status][build badge]][build]
+[![Ansible galaxy][galaxy badge]][galaxy]
 
 Ansible role for installing and configuring [Transmission](http://www.transmissionbt.com/).
 
@@ -118,3 +118,10 @@ License
     LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
     THE SOFTWARE.
+
+
+[build badge]: https://img.shields.io/travis/elboletaire/ansible-transmission.svg?style=flat-square
+[galaxy badge]: https://img.shields.io/ansible/role/5518.svg?style=flat-square
+
+[build]: https://travis-ci.org/elboletaire/ansible-transmission
+[galaxy]: https://galaxy.ansible.com/elboletaire/transmission/
