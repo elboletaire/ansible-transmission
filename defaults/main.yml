@@ -26,3 +26,6 @@ transmission_speed_limit_down: 100
 
 transmission_blocklist_enabled: false
 transmission_blocklist_url: http://www.example.com/blocklist
+
+transmission_peer_port: 51413
+transmission_port_forwarding_enabled: False
