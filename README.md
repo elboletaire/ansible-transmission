@@ -66,7 +66,7 @@ There are no mandatory variables.
 | `transmission_blocklist_url`     | `http://www.example.com/blocklist` |
 
 Please, refer to the
-[transmission documentation](https://trac.transmissionbt.com/wiki/EditConfigFiles)
+[transmission documentation](https://github.com/transmission/transmission/wiki/Editing-Configuration-Files)
 to better understand this variables.
 
 Example Playbook
