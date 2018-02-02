@@ -1,5 +1,6 @@
 ---
-transmission_user: "{{ ansible_user_id }}"
+transmission_user: "debian-transmission"
+transmission_group: "debian-transmission"
 transmission_password: youShouldChangeThisUnlessDisablingAuth
 transmission_url: '/transmission/'
 
@@ -26,3 +27,6 @@ transmission_speed_limit_down: 100
 
 transmission_blocklist_enabled: false
 transmission_blocklist_url: http://www.example.com/blocklist
+
+transmission_peer_port: 51413
+transmission_port_forwarding_enabled: false

@@ -14,12 +14,19 @@
   ignore_errors: true
   tags: transmission
 
+- name: grep and register
+  shell: >
+    egrep "^{{ transmission_user }}:" /etc/passwd | awk -F: '{ printf $6 }'
+  changed_when: false
+  tags: transmission
+  register: _user_home
+
 - name: Add downloads folder
   file:
     state: directory
     path: "{{ transmission_download_dir }}"
     owner: "{{ transmission_user }}"
-    group: debian-transmission
+    group: "{{ transmission_group }}"
     mode: 0775
   tags: transmission
 
@@ -28,7 +35,7 @@
     state: directory
     path: "{{ transmission_watch_dir }}"
     owner: "{{ transmission_user }}"
-    group: debian-transmission
+    group: "{{ transmission_group }}"
     mode: 0775
   when: transmission_watch_dir_enabled
   tags: transmission
@@ -38,23 +45,61 @@
     state: directory
     path: "{{ transmission_incomplete_dir }}"
     owner: "{{ transmission_user }}"
-    group: debian-transmission
+    group: "{{ transmission_group }}"
     mode: 0775
   when: transmission_incomplete_dir_enabled
   tags: transmission
 
+- name: Add config directory
+  file:
+    state: directory
+    path: "{{ _user_home.stdout }}/.config/transmission-daemon"
+    owner: "{{ transmission_user }}"
+    group: "{{ transmission_group }}"
+    mode: 0755
+  tags: transmission
+
 - name: Copy Transmission configuration
   template:
-    src: etc/transmission-daemon/settings.json.j2
-    dest: /etc/transmission-daemon/settings.json
+    src: settings.json.j2
+    dest: "{{ _user_home.stdout }}/.config/transmission-daemon/settings.json"
+    owner: "{{ transmission_user }}"
+    group: "{{ transmission_group }}"
   tags: transmission
 
 - name: Add current user to transmission group
   user:
     name: "{{ transmission_user }}"
-    groups: debian-transmission
+    groups: "{{ transmission_group }}"
     append: yes
   tags: transmission
+
+- name: "Create transmission-daemon overwrite systemd config directory"
+  file:
+    path: "/etc/systemd/system/transmission-daemon.service.d"
+    state: directory
+    mode: 0755
+  tags: transmission
+
+- name: "Change transmission-daemon systemd user"
+  ini_file:
+    path: /etc/systemd/system/transmission-daemon.service.d/user.conf
+    section: Service
+    option: User
+    value: "{{ transmission_user }}"
+  notify: reload systemd
+  tags: transmission
+
+- name: "Change transmission-daemon systemd timer group"
+  ini_file:
+    path: /etc/systemd/system/transmission-daemon.service.d/group.conf
+    section: Service
+    option: Group
+    value: "{{ transmission_group }}"
+  notify: reload systemd
+  tags: transmission
+
+- meta: flush_handlers
 
 # Service start
 - name: Start transmission
