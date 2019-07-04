@@ -17,6 +17,7 @@
 - name: grep and register
   shell: >
     egrep "^{{ transmission_user }}:" /etc/passwd | awk -F: '{ printf $6 }'
+  check_mode: false
   changed_when: false
   tags: transmission
   register: _user_home
