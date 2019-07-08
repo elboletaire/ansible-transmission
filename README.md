@@ -123,8 +123,8 @@ License
     THE SOFTWARE.
 
 
-[build badge]: https://img.shields.io/travis/elboletaire/ansible-transmission.svg?style=flat-square
+[build badge]: https://img.shields.io/gitlab/pipeline/elboletaire/ansible-transmission.svg?style=flat-square
 [galaxy badge]: https://img.shields.io/ansible/role/5518.svg?style=flat-square
 
-[build]: https://travis-ci.org/elboletaire/ansible-transmission
+[build]: https://gitlab.com/elboletaire/ansible-transmission/pipelines
 [galaxy]: https://galaxy.ansible.com/elboletaire/transmission/

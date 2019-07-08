@@ -1,6 +1,9 @@
 stages:
 - test
 
+variables:
+  roles_path: /etc/ansible/roles/tests
+
 .test: &test
   image: docker:stable
   services:
@@ -13,15 +16,21 @@ stages:
     -f tests/${distribution}.dockerfile
     --tag=${distribution}-${version}:ansible tests
   - export container_id=$(mktemp)
-  - docker run --detach -v $PWD/tests:/etc/ansible/roles/tests:ro ${distribution}-${version}:ansible > "${container_id}"
+  - docker run --detach -v $PWD/tests:${roles_path}:ro ${distribution}-${version}:ansible > "${container_id}"
   script:
   - docker exec "$(cat ${container_id})"
     env ANSIBLE_FORCE_COLOR=1
-    ansible-playbook -v /etc/ansible/roles/tests/test.yml --syntax-check
+    ansible-playbook -v ${roles_path}/test.yml --syntax-check
   - docker exec "$(cat ${container_id})"
     env ANSIBLE_FORCE_COLOR=1
-    ansible-playbook -v /etc/ansible/roles/tests/test.yml
+    ansible-playbook -v ${roles_path}/test.yml
   - docker rm -f "$(cat ${container_id})"
+
+debian-buster:
+  <<: *test
+  variables:
+    distribution: debian
+    version: buster
 
 debian-jessie:
   <<: *test
@@ -35,17 +44,11 @@ debian-stretch:
     distribution: debian
     version: stretch
 
-ubuntu-xenial:
+ubuntu-disco:
   <<: *test
   variables:
     distribution: ubuntu
-    version: xenial
-
-ubuntu-bionic:
-  <<: *test
-  variables:
-    distribution: ubuntu
-    version: bionic
+    version: disco
 
 ubuntu-cosmic:
   <<: *test
@@ -53,8 +56,14 @@ ubuntu-cosmic:
     distribution: ubuntu
     version: cosmic
 
-ubuntu-disco:
+ubuntu-bionic:
   <<: *test
   variables:
     distribution: ubuntu
-    version: disco
+    version: bionic
+
+ubuntu-xenial:
+  <<: *test
+  variables:
+    distribution: ubuntu
+    version: xenial
