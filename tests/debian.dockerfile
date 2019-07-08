@@ -11,7 +11,7 @@ RUN apt-get update -y && apt-get install -y --no-install-recommends \
     git \
     systemd
 
-RUN pip install setuptools && pip install ansible
+RUN pip install --upgrade setuptools && pip install ansible
 
 RUN mkdir -p /etc/ansible && echo "[local]\nlocalhost ansible_connection=local" > /etc/ansible/hosts
 
