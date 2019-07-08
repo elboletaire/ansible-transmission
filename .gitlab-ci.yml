@@ -1,0 +1,60 @@
+stages:
+- test
+
+.test: &test
+  image: docker:stable
+  services:
+  - docker:dind
+  stage: test
+  before_script:
+  - docker pull ${distribution}:${version}
+  - docker build --no-cache --rm
+    --build-arg version=${version}
+    -f tests/${distribution}.dockerfile
+    --tag=${distribution}-${version}:ansible tests
+  - export container_id=$(mktemp)
+  - docker run --detach -v $PWD/tests:/etc/ansible/roles/tests:ro ${distribution}-${version}:ansible > "${container_id}"
+  script:
+  - docker exec "$(cat ${container_id})"
+    env ANSIBLE_FORCE_COLOR=1
+    ansible-playbook -v /etc/ansible/roles/tests/test.yml --syntax-check
+  - docker exec "$(cat ${container_id})"
+    env ANSIBLE_FORCE_COLOR=1
+    ansible-playbook -v /etc/ansible/roles/tests/test.yml
+  - docker rm -f "$(cat ${container_id})"
+
+debian-jessie:
+  <<: *test
+  variables:
+    distribution: debian
+    version: jessie
+
+debian-stretch:
+  <<: *test
+  variables:
+    distribution: debian
+    version: stretch
+
+ubuntu-xenial:
+  <<: *test
+  variables:
+    distribution: ubuntu
+    version: xenial
+
+ubuntu-bionic:
+  <<: *test
+  variables:
+    distribution: ubuntu
+    version: bionic
+
+ubuntu-cosmic:
+  <<: *test
+  variables:
+    distribution: ubuntu
+    version: cosmic
+
+ubuntu-disco:
+  <<: *test
+  variables:
+    distribution: ubuntu
+    version: disco
