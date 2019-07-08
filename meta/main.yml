@@ -3,17 +3,16 @@ galaxy_info:
   author: Òscar Casajuana
   description: Transmission for debian based systems
   license: MIT
-  min_ansible_version: 1.2
+  min_ansible_version: 1.4
   platforms:
     - name: Ubuntu
       versions:
-        - trusty
-        - utopic
-        - vivid
+        - xenial
+        - bionic
     - name: Debian
       versions:
         - jessie
-        - wheezy
+        - stretch
   categories:
     - networking
 dependencies: []

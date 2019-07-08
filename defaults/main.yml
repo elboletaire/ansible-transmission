@@ -1,5 +1,6 @@
 ---
-transmission_user: "{{ ansible_user_id }}"
+transmission_user: "debian-transmission"
+transmission_group: "debian-transmission"
 transmission_password: youShouldChangeThisUnlessDisablingAuth
 transmission_url: '/transmission/'
 
@@ -9,6 +10,8 @@ transmission_rpc_whitelist: 127.0.0.1
 transmission_rpc_auth_required: false
 transmission_rpc_bind_address: 0.0.0.0
 transmission_rpc_port: 9091
+transmission_rpc_host_whitelist_enabled: true
+transmission_rpc_host_whitelist: ""
 
 transmission_umask: 2
 
@@ -28,3 +31,6 @@ transmission_speed_limit_down: 100
 
 transmission_blocklist_enabled: false
 transmission_blocklist_url: http://www.example.com/blocklist
+
+transmission_peer_port: 51413
+transmission_port_forwarding_enabled: false

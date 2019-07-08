@@ -27,14 +27,16 @@ There are no mandatory variables.
 
 ### Web interface & RPC
 
-| Variable                             | Default                 |
-| ------------------------------------ | ----------------------- |
-| `transmission_password`              |                         |
-| `transmission_rpc_auth_required`     | `false`                 |
-| `transmission_user`                  | `{{ ansible_user_id }}` |
-| `transmission_rpc_whitelist_enabled` | `false`                 |
-| `transmission_rpc_whitelist`         | `127.0.0.1`             |
-| `transmission_url`                   | `/transmission/`        |
+| Variable                                  | Default                 |
+| ----------------------------------------- | ----------------------- |
+| `transmission_password`                   |                         |
+| `transmission_rpc_auth_required`          | `false`                 |
+| `transmission_user`                       | `{{ ansible_user_id }}` |
+| `transmission_rpc_whitelist_enabled`      | `true`                  |
+| `transmission_rpc_whitelist`              | `127.0.0.1`             |
+| `transmission_rpc_host_whitelist_enabled` | `true`                  |
+| `transmission_rpc_host_whitelist`         | `""`                    |
+| `transmission_url`                        | `/transmission/`        |
 
 ### Folders
 
@@ -66,7 +68,7 @@ There are no mandatory variables.
 | `transmission_blocklist_url`     | `http://www.example.com/blocklist` |
 
 Please, refer to the
-[transmission documentation](https://trac.transmissionbt.com/wiki/EditConfigFiles)
+[transmission documentation](https://github.com/transmission/transmission/wiki/Editing-Configuration-Files)
 to better understand this variables.
 
 Example Playbook
@@ -121,8 +123,8 @@ License
     THE SOFTWARE.
 
 
-[build badge]: https://img.shields.io/travis/elboletaire/ansible-transmission.svg?style=flat-square
+[build badge]: https://img.shields.io/gitlab/pipeline/elboletaire/ansible-transmission.svg?style=flat-square
 [galaxy badge]: https://img.shields.io/ansible/role/5518.svg?style=flat-square
 
-[build]: https://travis-ci.org/elboletaire/ansible-transmission
+[build]: https://gitlab.com/elboletaire/ansible-transmission/pipelines
 [galaxy]: https://galaxy.ansible.com/elboletaire/transmission/
