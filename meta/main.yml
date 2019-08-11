@@ -8,11 +8,14 @@ galaxy_info:
     - name: Ubuntu
       versions:
         - xenial
+        - disco
+        - cosmic
         - bionic
     - name: Debian
       versions:
         - jessie
         - stretch
+        - buster
   categories:
     - networking
 dependencies: []
