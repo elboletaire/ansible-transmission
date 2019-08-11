@@ -6,20 +6,20 @@
     state: present
   tags: transmission
 
-# Configuration
-- name: Make sure transmission is not running
-  service:
-    name: transmission-daemon
-    state: stopped
-  ignore_errors: true
-  tags: transmission
-
-- name: grep and register
+- name: get user home dir
   shell: >
     egrep "^{{ transmission_user }}:" /etc/passwd | awk -F: '{ printf $6 }'
   changed_when: false
+  check_mode: false
   tags: transmission
   register: _user_home
+
+- name: Add user to transmission group
+  user:
+    name: "{{ transmission_user }}"
+    groups: "{{ transmission_group }}"
+    append: yes
+  tags: transmission
 
 - name: Add downloads folder
   file:
@@ -65,13 +65,7 @@
     dest: "{{ _user_home.stdout }}/.config/transmission-daemon/settings.json"
     owner: "{{ transmission_user }}"
     group: "{{ transmission_group }}"
-  tags: transmission
-
-- name: Add current user to transmission group
-  user:
-    name: "{{ transmission_user }}"
-    groups: "{{ transmission_group }}"
-    append: yes
+  notify: reload systemd
   tags: transmission
 
 - name: "Create transmission-daemon overwrite systemd config directory"
@@ -97,14 +91,4 @@
     option: Group
     value: "{{ transmission_group }}"
   notify: reload systemd
-  tags: transmission
-
-- meta: flush_handlers
-
-# Service start
-- name: Start transmission
-  service:
-    name: transmission-daemon
-    state: started
-  ignore_errors: true
   tags: transmission
