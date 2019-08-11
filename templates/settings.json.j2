@@ -51,7 +51,7 @@
     "rpc-password": "{{ transmission_password }}",
     "rpc-port": {{ transmission_rpc_port }},
     "rpc-url": "{{ transmission_url }}",
-    "rpc-username": "{{ transmission_user }}",
+    "rpc-username": "{{ transmission_rpc_user | default(transmission_user) }}",
     "rpc-whitelist": "{{ transmission_rpc_whitelist }}",
     "rpc-whitelist-enabled": {{ transmission_rpc_whitelist_enabled | lower }},
     "rpc-host-whitelist": "{{ transmission_rpc_host_whitelist }}",
