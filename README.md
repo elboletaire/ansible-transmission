@@ -27,16 +27,16 @@ There are no mandatory variables.
 
 ### Web interface & RPC
 
-| Variable                                  | Default                 |
-| ----------------------------------------- | ----------------------- |
-| `transmission_password`                   |                         |
-| `transmission_rpc_auth_required`          | `false`                 |
-| `transmission_user`                       | `{{ ansible_user_id }}` |
-| `transmission_rpc_whitelist_enabled`      | `true`                  |
-| `transmission_rpc_whitelist`              | `127.0.0.1`             |
-| `transmission_rpc_host_whitelist_enabled` | `true`                  |
-| `transmission_rpc_host_whitelist`         | `""`                    |
-| `transmission_url`                        | `/transmission/`        |
+| Variable                                  | Default                   |
+|-------------------------------------------|---------------------------|
+| `transmission_password`                   |                           |
+| `transmission_rpc_auth_required`          | `false`                   |
+| `transmission_rpc_user                    | `{{ transmission_user }}` |
+| `transmission_rpc_whitelist_enabled`      | `true`                    |
+| `transmission_rpc_whitelist`              | `127.0.0.1`               |
+| `transmission_rpc_host_whitelist_enabled` | `true`                    |
+| `transmission_rpc_host_whitelist`         | `""`                      |
+| `transmission_url`                        | `/transmission/`          |
 
 ### Folders
 
