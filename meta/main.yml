@@ -1,6 +1,7 @@
 ---
 galaxy_info:
   author: Òscar Casajuana
+  role_name: transmission
   description: Transmission for debian based systems
   license: MIT
   min_ansible_version: 1.4
